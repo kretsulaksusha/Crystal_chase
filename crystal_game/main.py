@@ -4,6 +4,7 @@ A simple game where you need to visit different places to collect 5 crystals to 
 
 See https://github.com/kretsulaksusha/Crystal_chase.
 """
+import datetime
 from random import randint
 import game
 
@@ -192,6 +193,7 @@ def main():
     money = 0
 
     crystals = 0
+    start = datetime.datetime.now()
 
     while crystals != 5:
 
@@ -334,8 +336,15 @@ a chocolate as a tip to the waiter and they gave you a little present too. \U000
                 print("\n\033[93mThere's nothing here to take!\033[00m")
         else:
             print(f"\n\033[93mThere is no command [{command}].\033[00m")
-    print("\n\33[95mCongratulations!!! You have collected all 5 crystals \
-while visiting Lviv!\033[00m")
+
+        # time limit
+        if (datetime.datetime.now() - start).seconds > 600:
+            print("Time is up. Try again later!")
+            break
+
+    if crystals == 5:
+        print("\n\33[95mCongratulations!!! You have collected all 5 crystals \
+    while visiting Lviv!\033[00m")
 
 
 if __name__ == "__main__":
