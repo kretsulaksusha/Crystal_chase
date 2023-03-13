@@ -202,7 +202,7 @@ def main():
 
         place = current_streat.place
         if place:
-            print(f"\n\033[1mYou are near:\033[00m {place.place}\n\
+            print(f"\n\033[1mYou are near:\033[00m {place.name}\n\
 {place.description}\n{place.action}")
 
         people = current_streat.people
@@ -339,7 +339,7 @@ a chocolate as a tip to the waiter and they gave you a little present too. \U000
 
         # time limit
         if (datetime.datetime.now() - start).seconds > 600:
-            print("Time is up. Try again later!")
+            print("\nTime is up. Try again later!")
             break
 
     if crystals == 5:
