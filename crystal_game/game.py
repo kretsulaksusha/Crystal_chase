@@ -61,12 +61,12 @@ class LvivStreats:
         return list(self.linked_streats.values())
 
 
-class Place:
+class Place(LvivStreats):
     """
     Items on the streats.
     """
-    def __init__(self, place: str) -> None:
-        self.place = place
+    def __init__(self, name: str) -> None:
+        super().__init__(name)
         self.description = ''
         self.action = ''
 
