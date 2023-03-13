@@ -1,14 +1,14 @@
-"Game_game_room."
+"Game."
 
-import game_room
+import game
 
-kitchen = game_room.Room("Kitchen")
+kitchen = game.Room("Kitchen")
 kitchen.set_description("A dank and dirty room buzzing with flies.")
 
-dining_hall = game_room.Room("Dining Hall")
+dining_hall = game.Room("Dining Hall")
 dining_hall.set_description("A large room with ornate golden decorations on each wall.")
 
-ballroom = game_room.Room("Ballroom")
+ballroom = game.Room("Ballroom")
 ballroom.set_description("""A vast room with a shiny wooden floor. Huge candlesticks \
 guard the entrance.""")
 
@@ -17,21 +17,27 @@ dining_hall.link_room(kitchen, "north")
 dining_hall.link_room(ballroom, "west")
 ballroom.link_room(dining_hall, "east")
 
-dave = game_room.Enemy("Dave", "A smelly zombie")
+dave = game.Enemy("Dave", "A smelly zombie")
 dave.set_conversation("What's up, dude! I'm hungry.")
 dave.set_weakness("cheese")
 dining_hall.set_character(dave)
 
-tabitha = game_room.Enemy("Tabitha", "An enormous spider with countless eyes and furry legs.")
+tabitha = game.Enemy("Tabitha", "An enormous spider with countless eyes and furry legs.")
 tabitha.set_conversation("Sssss....I'm so bored...")
 tabitha.set_weakness("book")
 ballroom.set_character(tabitha)
 
-cheese = game_room.Item("cheese")
+carolina = game.Friend("Carolina", "A cat with beautiful eyes, adorably tiny paws \
+and two perky ears which are very sensitive to sounds.")
+carolina.set_conversation("Meow! Hice to meet you!")
+carolina.set_hobby("playing with the coil of threads, purring")
+kitchen.set_friend(carolina)
+
+cheese = game.Item("cheese")
 cheese.set_description("A large and smelly block of cheese")
 ballroom.set_item(cheese)
 
-book = game_room.Item("book")
+book = game.Item("book")
 book.set_description("A really good book entitled 'Knitting for dummies'")
 dining_hall.set_item(book)
 
@@ -44,6 +50,11 @@ while DEAD is False:
 
     print("\n")
     current_room.get_details()
+
+    friends = current_room.get_friend()
+    if friends:
+        friends.describe()
+        friends.get_hobby()
 
     inhabitant = current_room.get_character()
     if inhabitant is not None:
@@ -62,6 +73,8 @@ while DEAD is False:
         # Talk to the inhabitant - check whether there is one!
         if inhabitant is not None:
             inhabitant.talk()
+        elif friends is not None:
+            friends.talk()
     elif command == "fight":
         if inhabitant is not None:
             # Fight with the inhabitant, if there is one
@@ -81,7 +94,7 @@ while DEAD is False:
                 else:
                     # What happens if you lose?
                     print("Oh dear, you lost the fight.")
-                    print("That's the end of the game_room")
+                    print("That's the end of the game")
                     DEAD = True
             else:
                 print("You don't have a " + fight_with)
