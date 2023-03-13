@@ -10,6 +10,7 @@ class Room:
         self.linked_rooms = {}
         self.item = None
         self.character = None
+        self.friend = None
 
     def __str__(self) -> str:
         return self.room
@@ -53,15 +54,28 @@ class Room:
         """
         return self.character
 
+    def set_friend(self, friend: object):
+        """
+        Setting friend.
+        """
+        self.friend = friend
+
+    def get_friend(self):
+        """
+        Setting friend.
+        """
+        return self.friend
+
     def get_details(self):
         """
         Getting details.
         """
         details = [self.room, '--------------------', self.description,
-                   *[f"The {room} is {direct}" for room, direct in self.linked_rooms.items()]]
+                   * sorted([f"The {room} is {direct}"
+                     for room, direct in self.linked_rooms.items()])]
         print("\n".join(details))
 
-    def move(self, command: str) -> str:
+    def move(self, command: str) -> object:
         """
         Move to another room.
         """
@@ -72,29 +86,20 @@ class Room:
             return self
 
 
-class Enemy:
+class Character:
     """
-    Enemy class.
+    Characters for the game.
     """
-    defeated = 0
-
     def __init__(self, name: str, description: str) -> None:
         self.name = name
         self.description = description
         self.conversation = ""
-        self.weakness = None
 
     def set_conversation(self, text: str):
         """
         Setting conversation.
         """
         self.conversation = text
-
-    def set_weakness(self, weakness: str):
-        """
-        Setting weakness.
-        """
-        self.weakness = weakness
 
     def describe(self):
         """
@@ -108,6 +113,43 @@ class Enemy:
         On talk command.
         """
         print(f"[{self.name} says]: {self.conversation}")
+
+
+class Friend(Character):
+    """
+    Player's friend.
+    """
+    def __init__(self, name: str, description: str) -> None:
+        super().__init__(name, description)
+        self.hobby = None
+
+    def set_hobby(self, hobby: str):
+        """
+        Setting qualities.
+        """
+        self.hobby = hobby
+
+    def get_hobby(self):
+        """
+        Character's hobbies.
+        """
+        print(f"Hobbies: {self.hobby}")
+
+
+class Enemy(Character):
+    """
+    Enemy class.
+    """
+    defeated = 0
+    def __init__(self, name: str, description: str) -> None:
+        super().__init__(name, description)
+        self.weakness = None
+
+    def set_weakness(self, weakness: str):
+        """
+        Setting weakness.
+        """
+        self.weakness = weakness
 
     def fight(self, fight_with: str):
         """
