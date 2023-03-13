@@ -65,7 +65,11 @@ class Room:
         """
         Move to another room.
         """
-        return [i for i, j in self.linked_rooms.items() if j == command][0]
+        try:
+            return [i for i, j in self.linked_rooms.items() if j == command][0]
+        except IndexError:
+            print('\nInvalid command!')
+            return self
 
 
 class Enemy:
