@@ -99,6 +99,9 @@ Then you type in a different commands and complete tasks to win in this game.<br
 <h2 align="center">Colored text in terminal</h2>
 <img src="crystal_game/sample.png" alt="Top main page" style='border-radius: 15px'>
 
+<h2 align="center">Connection between streats</h2>
+<img src="crystal_game/diagram.png" alt="Diagram" style='border-radius: 15px'>
+
 ## Emailware
 
 Crystal Chase is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <kretsula.k@gmail.com> about anything you'd want to say about this game. I'd really appreciate it!
